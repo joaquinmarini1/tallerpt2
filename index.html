@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>IA en Universidades · Infografía LATAM</title>
+<meta name="description" content="Infografía web sobre el uso de IA en la educación superior en Argentina y América Latina: datos, mitos y realidades, políticas, casos y buenas prácticas." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- Usamos una fuente libre, pero el sitio funciona igual sin conexión -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+  :root{
+    --bg:#0b0d12;
+    --ink:#e7eaf0;
+    --muted:#b8c0cc;
+    --accent:#5ee1b9;
+    --accent-2:#7aa8ff;
+    --accent-3:#ffd166;
+    --card:#141824;
+    --danger:#ff6b6b;
+    --ok:#56f3a0;
+    --shadow: 0 10px 30px rgba(0,0,0,.35);
+    --radius: 16px;
+    --maxw: 1100px;
+  }
+
+  /* Reset mínimo y tipografía */
+  *,*::before,*::after{ box-sizing: border-box }
+  html,body{ height:100% }
+  body{
+    margin:0;
+    background: radial-gradient(1200px 600px at 70% -10%, #1b2133 0%, var(--bg) 50%) fixed, var(--bg);
+    color: var(--ink);
+    font: 16px/1.45 'Inter', system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+    text-rendering: optimizeLegibility;
+  }
+  a{ color: var(--accent); text-decoration: none }
+  a:hover{ text-decoration: underline }
+
+  header.site{
+    position: sticky; top:0; z-index: 10;
+    backdrop-filter: saturate(120%) blur(8px);
+    background: linear-gradient(180deg, rgba(11,13,18,.85), rgba(11,13,18,.6));
+    border-bottom: 1px solid rgba(126,145,170,.2);
+  }
+  .nav{
+    max-width: var(--maxw); margin: 0 auto; padding: .6rem 1rem;
+    display:flex; gap:1rem; align-items:center; justify-content: space-between;
+  }
+  .brand{ font-weight:800; letter-spacing:.2px }
+  .brand em{ color: var(--accent); font-style: normal }
+  .nav a.jump{ color: var(--muted); padding:.4rem .6rem; border-radius:8px }
+  .nav a.jump:focus-visible{ outline:2px solid var(--accent) }
+
+  .hero{
+    max-width: var(--maxw); margin: clamp(24px,5vw,56px) auto; padding: 0 1rem;
+    display:grid; grid-template-columns: 1.1fr .9fr; gap: clamp(18px,3vw,32px);
+    align-items: end;
+  }
+  .hero h1{
+    font-weight:800; font-size: clamp(32px, 4vw, 56px); line-height: 1.05; margin: 0 0 12px;
+  }
+  .hero p.lead{ color: var(--muted); font-size: clamp(16px,1.8vw,19px); margin:.2rem 0 1rem }
+  .note{ color: var(--muted); font-size: .9rem }
+  .panel{
+    background: linear-gradient(180deg, #0f1422, #0c101a);
+    border: 1px solid rgba(126,145,170,.18);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: clamp(14px,2.2vw,22px);
+  }
+
+  .stats{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px }
+  .stat{
+    background: linear-gradient(180deg, #12182a, #0f1422);
+    border: 1px solid rgba(126,145,170,.18);
+    border-radius: 12px; padding: 16px;
+  }
+  .kpi{ font-size: clamp(26px,3.2vw,40px); font-weight:800 }
+  .kpi small{ font-weight:600; color: var(--accent-3) }
+  .kcap{ color: var(--muted); font-size: .92rem; margin-top: 6px }
+
+  section{ scroll-margin-top: 72px; }
+  .section{
+    max-width: var(--maxw); margin: 60px auto; padding: 0 1rem;
+    display:grid; grid-template-columns: 1fr 1fr; gap: 18px;
+  }
+  .section h2{
+    font-size: clamp(22px, 2.6vw, 34px); margin:0 0 10px; line-height:1.1
+  }
+  .section p{ color: var(--muted) }
+
+  .card{
+    background: var(--card);
+    border: 1px solid rgba(126,145,170,.18);
+    border-radius: var(--radius);
+    padding: clamp(14px,2.2vw,22px);
+    box-shadow: var(--shadow);
+  }
+
+  /* Mitos vs Realidades */
+  .myths{ display:grid; grid-template-columns: 1fr 1fr; gap:12px }
+  .myth{ border-left: 4px solid var(--danger) }
+  .fact{ border-left: 4px solid var(--ok) }
+  .myth h3,.fact h3{ margin:0 0 .2rem; font-size: 1.05rem }
+  .pill{ display:inline-block; font-size:.78rem; color:#0a0f16; font-weight:700; padding:.2rem .5rem; border-radius:999px; background: var(--accent); }
+
+  /* Línea temporal / casos */
+  .timeline{ display:grid; gap:12px }
+  .t-item{ display:grid; grid-template-columns: 120px 1fr; gap:12px; align-items: start }
+  .t-when{ color: var(--accent-2); font-weight:700 }
+  .t-card{ padding: 14px 16px; border-radius: 12px; background: #10172a; border:1px solid rgba(126,145,170,.18) }
+
+  /* Buenas prácticas: lista con checks */
+  .best{ display:grid; gap:10px }
+  .best li{ list-style:none; display:flex; gap:10px; align-items:flex-start; background:#10172a; padding:12px 14px; border-radius:12px; border:1px solid rgba(126,145,170,.18) }
+  .best svg{ flex:0 0 20px }
+
+  /* Recursos en tarjetas */
+  .resources{ display:grid; grid-template-columns: repeat(3,1fr); gap:12px }
+  .resources a.card{ display:block; transition: transform .2s ease }
+  .resources a.card:hover{ transform: translateY(-2px) }
+
+  /* Reveal animation (scroll) */
+  .reveal{ opacity:0; transform: translateY(12px); transition: opacity .6s ease, transform .6s ease }
+  .reveal.in{ opacity:1; transform: none }
+
+  /* Footer */
+  footer{ border-top: 1px solid rgba(126,145,170,.18); margin-top: 60px; }
+  .foot{ max-width: var(--maxw); margin: 0 auto; padding: 20px 1rem 60px; color: var(--muted) }
+  .sources{ font-size: .9rem; display:grid; gap:6px; margin-top: 10px }
+  .sources a{ color: var(--muted) }
+
+  /* Responsivo */
+  @media (max-width: 920px){
+    .hero{ grid-template-columns: 1fr; }
+    .section{ grid-template-columns: 1fr; }
+    .resources{ grid-template-columns: 1fr 1fr }
+    .stats{ grid-template-columns: 1fr 1fr 1fr }
+  }
+  @media (max-width: 640px){
+    .stats{ grid-template-columns: 1fr 1fr }
+    .resources{ grid-template-columns: 1fr }
+    .t-item{ grid-template-columns: 1fr }
+  }
+
+  /* Accesibilidad: respeta preferencias de movimiento */
+  @media (prefers-reduced-motion: reduce){
+    *{ animation: none !important; transition: none !important; scroll-behavior: auto !important }
+    .reveal{ opacity:1; transform:none }
+  }
+</style>
+</head>
+<body>
+<header class="site">
+  <nav class="nav" aria-label="Salto de secciones">
+    <div class="brand" aria-label="Marca del sitio">IA <em>en Universidades</em></div>
+    <div>
+      <a class="jump" href="#datos">Datos</a>
+      <a class="jump" href="#mitos">Mitos</a>
+      <a class="jump" href="#politicas">Políticas</a>
+      <a class="jump" href="#casos">Casos</a>
+      <a class="jump" href="#buenas">Buenas prácticas</a>
+      <a class="jump" href="#recursos">Recursos</a>
+    </div>
+  </nav>
+</header>
+
+<main>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="panel reveal" style="--delay:0s">
+      <h1>IA en la educación superior de <span style="color:var(--accent)">Argentina</span> y <span style="color:var(--accent-2)">LATAM</span></h1>
+      <p class="lead">Una infografía web sobre adopción, riesgos, políticas y oportunidades de la IA (especialmente la IA generativa) en universidades de la región.</p>
+      <p class="note">Fuente de datos en español/línea regional. Ver <a href="#fuentes">Fuentes</a>.</p>
+    </div>
+    <div class="panel reveal" aria-labelledby="stats-title">
+      <h2 id="stats-title" style="margin-top:0">Cifras clave</h2>
+      <div class="stats">
+        <div class="stat" data-count-to="10" data-suffix="%">
+          <div class="kpi"><span class="kpi-num">0</span><small> de HEIs</small></div>
+          <div class="kcap">Menos del 10% de universidades/escuelas tenían políticas de IA generativa (encuesta UNESCO, 2023).</div>
+        </div>
+        <div class="stat" data-count-to="38" data-suffix="%">
+          <div class="kpi"><span class="kpi-num">0</span><small> exp.</small></div>
+          <div class="kcap">Entre 26% y 38% de empleos en LAC están expuestos a IA → presión para actualizar currículas (BM/OIT, 2025).</div>
+        </div>
+        <div class="stat" data-count-to="31" data-suffix="M">
+          <div class="kpi"><span class="kpi-num">0</span><small> matrículas</small></div>
+          <div class="kcap">>31 millones de estudiantes en educación superior en LATAM (UIS-UNESCO, 2023/24).</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MITOS vs REALIDADES -->
+  <section id="mitos" class="section">
+    <div class="reveal">
+      <h2>Mitos y realidades de la IA en la universidad</h2>
+      <p>Desmontar creencias ayuda a diseñar políticas efectivas y experiencias de aprendizaje con integridad académica.</p>
+    </div>
+    <div class="myths">
+      <article class="card myth reveal" aria-labelledby="m1">
+        <h3 id="m1">Mito: “La IA reemplaza al docente”.</h3>
+        <p><span class="pill">Realidad</span> La evidencia sugiere que la IA debe <strong>amplificar</strong> capacidades docentes (tutoría, retroalimentación, personalización) y no sustituirlas.</p>
+        <small class="note">Banco Mundial (2025).</small>
+      </article>
+
+      <article class="card myth reveal" aria-labelledby="m2">
+        <h3 id="m2">Mito: “Prohibir IA evita el plagio”.</h3>
+        <p><span class="pill">Realidad</span> Los bloqueos puros desplazan el problema. Funciona mejor: rediseño de evaluaciones, transparencia y literacidades de IA.</p>
+        <small class="note">UNESCO IESALC / prácticas internacionales.</small>
+      </article>
+
+      <article class="card fact reveal" aria-labelledby="m3">
+        <h3 id="m3">Hecho: Políticas claras aún son minoría.</h3>
+        <p>Muchas universidades de la región están <em>recién</em> formalizando pautas de uso, evaluación y ética de IA.</p>
+        <small class="note">UNESCO (encuesta global 2023).</small>
+      </article>
+
+      <article class="card fact reveal" aria-labelledby="m4">
+        <h3 id="m4">Hecho: Docentes ya experimentan con IA.</h3>
+        <p>Encuestas regionales muestran adopción docente creciente y demanda de formación específica.</p>
+        <small class="note">Red Columbus (docencia, 2024).</small>
+      </article>
+    </div>
+  </section>
+
+  <!-- POLÍTICAS Y ADOPCIÓN -->
+  <section id="politicas" class="section">
+    <div class="reveal">
+      <h2>Adopción y marcos de política</h2>
+      <p>De “pilotos” aislados a estrategias institucionales: gobernanza de datos, ética, evaluación y desarrollo docente.</p>
+      <div class="card" role="region" aria-label="Puntos de una política institucional">
+        <ul class="best" style="margin:0; padding:0">
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Directrices claras por rol</strong> (estudiantes, docentes, PAS, investigación), con ejemplos de uso permitido/no permitido.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Transparencia y citación</strong>: declarar uso de IA y cómo influyó en el resultado; trazabilidad y versionado.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Avales éticos y privacidad</strong>: datos sensibles, sesgos, no-discriminación, seguridad y cumplimiento local.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Evaluación auténtica</strong>: tareas con proceso, oralidad, defensa, rúbricas y co-creación.</div>
+          </li>
+          <li>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div><strong>Formación docente continua</strong> y <strong>laboratorios de práctica</strong> institucionales.</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card reveal" aria-labelledby="adopcion-titulo">
+      <h3 id="adopcion-titulo" style="margin-top:0">Indicadores de adopción en LATAM</h3>
+      <ul class="best" style="margin:0; padding:0">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#7aa8ff" stroke-width="2"/><path d="M8 12l2.5 2.5L16 9" stroke="#7aa8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>&lt;10% con políticas formales de IAG (2023)</strong> en una muestra global de >450 instituciones (tendencia al alza en 2024-2025).</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#7aa8ff" stroke-width="2"/><path d="M8 12l2.5 2.5L16 9" stroke="#7aa8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Docentes de 38+ universidades en 11 países (2024)</strong> reportan usos para ideación, rúbricas, y diseño de materiales.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="#7aa8ff" stroke-width="2"/><path d="M8 12l2.5 2.5L16 9" stroke="#7aa8ff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>31M+ estudiantes de educación superior (2023/24)</strong> en la región — escalar formación en IA es prioritario.</div>
+        </li>
+      </ul>
+      <p class="note">Indicadores resumidos; ver detalle y enlaces en <a href="#fuentes">Fuentes</a>.</p>
+    </div>
+  </section>
+
+  <!-- CASOS / LÍNEA TEMPORAL -->
+  <section id="casos" class="section">
+    <div>
+      <h2 class="reveal">Casos y señales en Argentina / región</h2>
+      <div class="timeline">
+        <div class="t-item reveal">
+          <div class="t-when">2019 → 2024</div>
+          <div class="t-card">
+            <strong>“Boti” (GCBA) integra IAG en 2024</strong>: el chatbot oficial suma modelos generativos para mejorar respuestas y planificación turística.
+            <div class="note">Ejemplo local de integración pública con impacto en experiencia de usuario.</div>
+          </div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-when">2024</div>
+          <div class="t-card">
+            <strong>Encuesta docente (red regional)</strong>: 172 docentes, 38+ universidades en 11 países declaran usos en docencia y piden formación específica en IAG.
+          </div>
+        </div>
+        <div class="t-item reveal">
+          <div class="t-when">2025</div>
+          <div class="t-card">
+            <strong>BID “IA Presente!”</strong>: convocatoria regional para soluciones con IA en procesos educativos en ALC; impulso a pilotos y escalamiento.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="margin-top:0">¿Dónde enfocar en campus?</h3>
+      <ul class="best" style="margin:0; padding:0">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M12 3v18" stroke="#ffd166" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Tutoría y escritura asistida</strong> en materias de alto volumen (primer año); feedback formativo y rúbricas transparentes.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M12 3v18" stroke="#ffd166" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Analítica de aprendizaje</strong> con foco ético y de privacidad; tableros para docentes.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M3 12h18M12 3v18" stroke="#ffd166" stroke-width="2" stroke-linecap="round"/></svg>
+          <div><strong>Formación transversal</strong> en literacidades de IA (prompting responsable, verificación, sesgos).</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- BUENAS PRÁCTICAS -->
+  <section id="buenas" class="section">
+    <div class="reveal">
+      <h2>Buenas prácticas para cátedras y carreras</h2>
+      <ol class="best" style="margin:0; padding:0">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Declará uso de IA</strong> en trabajos y explicá su aporte (qué, cómo y por qué). Incluí sección “Metodología y herramientas”.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Rediseñá evaluaciones</strong>: orales cortas, defensa de código, iteraciones con registro de cambios y feedback entre pares.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Protegé datos</strong>: no subas datos sensibles a servicios externos sin base legal y controles; priorizá opciones institucionales.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Capacitá a docentes</strong> con micro-talleres por disciplina; compartí guías y ejemplos contextualizados.</div>
+        </li>
+      </ol>
+    </div>
+
+    <div class="card reveal">
+      <h3 style="margin-top:0">Checklist rápido (curso por curso)</h3>
+      <ul class="best" style="margin:0; padding:0">
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2"/></svg>
+          <div>Incluí una <strong>política de IA</strong> de 5-7 líneas en el programa.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2"/></svg>
+          <div>Agregá una <strong>rúbrica</strong> con criterios de originalidad, proceso y referencia de IA.</div>
+        </li>
+        <li>
+          <svg width="20" height="20" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5" stroke="#56f3a0" stroke-width="2"/></svg>
+          <div>Promové <strong>verificación</strong> (fuentes, replicación de resultados, pruebas unitarias en código).</div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- RECURSOS -->
+  <section id="recursos" class="section">
+    <div class="reveal">
+      <h2>Recursos en español (AR + LATAM)</h2>
+      <p>Guías y reportes para políticas y formación.</p>
+    </div>
+    <div class="resources">
+      <a class="card reveal" href="#fuentes" aria-label="UNESCO - políticas de IA generativa">
+        <h3 style="margin-top:0">UNESCO (IAG en educación)</h3>
+        <p class="note">Encuesta global: &lt;10% con políticas formales (2023).</p>
+      </a>
+      <a class="card reveal" href="#fuentes" aria-label="UNESCO IESALC - competencias y políticas">
+        <h3 style="margin-top:0">UNESCO IESALC</h3>
+        <p class="note">Marcos de competencias y rol de ES en políticas de IA.</p>
+      </a>
+      <a class="card reveal" href="#fuentes" aria-label="Banco Mundial / OIT - exposición al empleo">
+        <h3 style="margin-top:0">Banco Mundial / OIT</h3>
+        <p class="note">26–38% de empleos en LAC expuestos a IA.</p>
+      </a>
+      <a class="card reveal" href="#fuentes" aria-label="BID - convocatoria IA Presente!">
+        <h3 style="margin-top:0">BID (IA Presente!)</h3>
+        <p class="note">Impulso regional a soluciones con IA en educación (2025).</p>
+      </a>
+      <a class="card reveal" href="#fuentes" aria-label="UIS / BM - matrícula superior en LATAM">
+        <h3 style="margin-top:0">UIS / Banco Mundial</h3>
+        <p class="note">31M+ estudiantes en ES en la región (2023/24).</p>
+      </a>
+      <a class="card reveal" href="#fuentes" aria-label="GCBA - Boti con IAG">
+        <h3 style="margin-top:0">Caso AR: “Boti”</h3>
+        <p class="note">Chatbot oficial de CABA integra IAG (2024).</p>
+      </a>
+    </div>
+  </section>
+
+  <!-- FUENTES -->
+  <section id="fuentes" class="section" aria-labelledby="fuentes-titulo">
+    <div class="card reveal" style="grid-column:1/-1">
+      <h2 id="fuentes-titulo" style="margin-top:0">Fuentes</h2>
+      <p class="note">Selección en español y foco regional. Enlaces externos:</p>
+      <div class="sources">
+        <a href="https://www.unesco.org/es/articles/la-inteligencia-artificial-generativa-en-la-educacion-documento-de-reflexion-de-sra-stefania" target="_blank" rel="noopener">UNESCO — IAG en educación (encuesta global, &lt;10% con políticas, 2023)</a>
+        <a href="https://www.iesalc.unesco.org/es/articles/los-retos-de-la-ia-en-la-educacion-superior-y-el-imperativo-de-los-marcos-de-competencias" target="_blank" rel="noopener">UNESCO IESALC — Retos en ES y marcos de competencias (2025)</a>
+        <a href="https://www.iadb.org/es/noticias/bid-lanza-convocatoria-para-identificar-soluciones-de-inteligencia-artificial-que-transformen-la" target="_blank" rel="noopener">BID — Convocatoria “IA Presente!” (2025)</a>
+        <a href="https://documents1.worldbank.org/curated/en/099809404152514027/pdf/IDU-91d6e888-fcbd-4694-ac88-18bcae998934.pdf" target="_blank" rel="noopener">Banco Mundial — Educación superior e IA en LAC (datos de matrícula, 2024)</a>
+        <a href="https://columbus-web.org/la-ia-generativa-en-la-docencia-bases-para-un-programa-de-formacion/" target="_blank" rel="noopener">Asociación Columbus — Encuesta docentes sobre IAG en docencia (LATAM, 2024)</a>
+        <a href="https://www.cippec.org/wp-content/uploads/2025/05/Guia-para-el-uso-de-IA-en-el-sector-publico-en-Argentina_2025.pdf" target="_blank" rel="noopener">CIPPEC — Guía de IA en sector público (AR, caso “Boti” con IAG, 2024/25)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="foot">
+    <div>Hecho con HTML + CSS + JS, animaciones accesibles y estilo “infografía”.</div>
+    <div class="note">© 2025 · Visual para uso educativo. Actualizá cifras según nuevas fuentes institucionales.</div>
+  </div>
+</footer>
+
+<script>
+/* =========
+   Interacción y animaciones
+   ========= */
+
+// IntersectionObserver para revelar elementos al hacer scroll
+const observer = new IntersectionObserver((entries) => {
+  for (const e of entries){
+    if(e.isIntersecting){
+      e.target.classList.add('in');
+      observer.unobserve(e.target);
+    }
+  }
+},{ threshold: .1 });
+
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// Contadores de KPIs (respetan prefers-reduced-motion)
+const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+function animateCount(el, to, suffix=''){
+  const numEl = el.querySelector('.kpi-num');
+  const dur = 1200; // ms
+  const start = performance.now();
+  const from = 0;
+  const isMillion = suffix === 'M';
+
+  function tick(now){
+    const t = Math.min(1, (now - start) / dur);
+    const eased = 1 - Math.pow(1 - t, 3); // easeOutCubic
+    let val = from + (to - from) * eased;
+    if(isMillion){
+      numEl.textContent = val.toFixed(0);
+    }else{
+      numEl.textContent = Math.round(val);
+    }
+    if(t < 1) requestAnimationFrame(tick);
+  }
+  if(reduce){
+    numEl.textContent = to;
+    return;
+  }
+  requestAnimationFrame(tick);
+}
+
+document.querySelectorAll('.stat').forEach(stat => {
+  const to = Number(stat.getAttribute('data-count-to') || 0);
+  const suffix = stat.getAttribute('data-suffix') || '';
+  const kpi = stat.querySelector('.kpi');
+  if(suffix) kpi.insertAdjacentHTML('beforeend', `<span style="color:#8fb1ff;margin-left:6px;font-size:.9em">${suffix}</span>`);
+  // Inicia conteo cuando se revela
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){
+        animateCount(stat, to, suffix);
+        io.disconnect();
+      }
+    })
+  },{threshold:.4});
+  io.observe(stat);
+});
+
+// Scroll suave accesible (sin forzar en reduce)
+if(!reduce){
+  document.documentElement.style.scrollBehavior = 'smooth';
+}
+</script>
+</body>
+</html>
